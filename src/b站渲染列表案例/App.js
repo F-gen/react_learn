@@ -3,7 +3,7 @@ import avatar from './images/avatar.png'
 import React from 'react'
 
 // 时间格式化
-function formatDate(time) {
+function formatDate (time) {
   return `${time.getFullYear()}-${time.getMonth()}-${time.getDate()}`
 }
 
@@ -50,7 +50,7 @@ class App extends React.Component {
       }
     ]
   }
-  render() {
+  render () {
     return (
       <div className="App">
         <div className="comment-container">
