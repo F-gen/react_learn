@@ -1,13 +1,14 @@
 import './index.css'
 import avatar from './images/avatar.png'
 import React from 'react'
-
+import { v4 as uuid } from 'uuid'
 // 时间格式化
 function formatDate(time) {
   return `${time.getFullYear()}-${time.getMonth()}-${time.getDate()}`
 }
 
 class App extends React.Component {
+
   state = {
     // hot: 热度排序  time: 时间排序
     tabs: [
@@ -48,7 +49,33 @@ class App extends React.Component {
         // 1: 点赞 0：无态度 -1:踩
         attitude: -1
       }
-    ]
+    ],
+    comment: '请输入内容'
+  }
+  tabSwitch = (type) => {
+    this.setState({
+      active: type
+
+    })
+  }
+  textChange = (e) => {
+    this.setState({
+      comment: e.target.value
+    })
+  }
+  submitCommet = () => {
+    this.setState({
+      list: [...this.state.list,
+        {
+          id: uuid(),
+          author: '五月天',
+          comment: this.state.comment,
+          time: new Date('2021-10-11 10:09:00'),
+          // 1: 点赞 0：无态度 -1:踩
+          attitude: 0
+        }
+      ]
+    })
   }
   render() {
     return (
@@ -64,6 +91,7 @@ class App extends React.Component {
               {
                 this.state.tabs.map(tab => (
                   <li
+                    onClick={() => this.tabSwitch(tab.type)}
                     key={tab.id}
                     className={tab.type === this.state.active ? 'on' : ''}
                   >按{tab.name}排序</li>
@@ -78,13 +106,16 @@ class App extends React.Component {
               <img className="user-head" src={avatar} alt="" />
             </div>
             <div className="textarea-container">
+              {/* 受控 */}
               <textarea
                 cols="80"
                 rows="5"
                 placeholder="发条友善的评论"
                 className="ipt-txt"
+                value={this.state.comment}
+                onChange={this.textChange}
               />
-              <button className="comment-submit">发表评论</button>
+              <button className="comment-submit" onClick={this.submitCommet}>发表评论</button>
             </div>
             <div className="comment-emoji">
               <i className="face"></i>
