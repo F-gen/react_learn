@@ -77,6 +77,11 @@ class App extends React.Component {
       ]
     })
   }
+  delBten = (id) => {
+    this.setState({
+      list: this.state.list.filter(item => item.id !== id)
+    })
+  }
   render() {
     return (
       <div className="App">
@@ -142,7 +147,7 @@ class App extends React.Component {
                       <span className={item.attitude === -1 ? 'hate hated' : 'hate'}>
                         <i className="icon" />
                       </span>
-                      <span className="reply btn-hover">删除</span>
+                      <span className="reply btn-hover" onClick={() => this.delBten(item.id)}>删除</span>
                     </div>
                   </div>
                 </div>
