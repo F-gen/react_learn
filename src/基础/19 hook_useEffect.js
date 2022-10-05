@@ -27,7 +27,7 @@ function App() {
   const [name, setName] = useState('zs')
   useEffect(() => {
     // 定义副作用
-    console.log('副作用执行了'); 
+    console.log('副作用执行了');
     document.title = count
   }, [count])
   return (

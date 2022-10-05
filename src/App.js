@@ -1,43 +1,57 @@
+import { useEffect, useState } from "react"
+// import axios from "axios"
+// useEffect  副作用，组件销毁后还会执行setinterval  ，需销毁副作用 逻辑后 return 
+// function Test() {
+//   useEffect(() => {
+//     let timer = setInterval(() => {
+//       console.log('setInterval');
+//     }, 1000)
+//     return () => {
+//       clearInterval(timer)
+//     }
+//   }, [])
+//   return (
+//     <div>test</div>
+//   )
+// }
 
 
 
-import { useState, useEffect } from 'react'
+// function App() {
 
-// 修改数据后，把count放在标题中
+//   const [flag, setFlag] = useState(true)
+//   return (
+//     <div >
+//       {flag ? <Test /> : null}
+//       <button onClick={() => setFlag(!flag)}>Switch</button>
+//     </div>
+//   )
+// }
+// export default App 
 
-// 1. 导入 useEffect 函数
-// 2. 调用 useEffect 函数，并传入回调函数
-// 3. 在回调函数中编写副作用处理（dom操作）
-// 4. 修改数据状态
-// 5. 检测副作用是否生效
 
-// 依赖项控制执行时机
 
-// 1. 默认状态 （无依赖项
-// 组件首次渲染执行一次，等每次数据更新时都会重新执行
 
-//2 空数组，只会在首次渲染执行一次
+// 类组件 发送请求  componentDidMount 
+// 初始化dom完毕执行yc
 
-//3 添加特定依赖性，[count]  
-// 组件初始化执行，特定项变化再执行
-
-// 4. useEffect 回调函数中用到的数据（比如，count）就是依赖数据，就应该出现在依赖项数组中，如果不添加依赖项就会有bug出现
+// useEffect
+// 1. 不加依赖项 - 初始化+重新渲染
+// 2. 加空数组 - 初始化一次
+// 3. 加特定依赖x - 【count，name】  -首次执行+ 任意变化
 function App() {
-  const [count, setCount] = useState(0)
-  const [name, setName] = useState('zs')
+
   useEffect(() => {
-    // 定义副作用
-    console.log('副作用执行了');
-    document.title = count
-  }, [count])
+    // async function fetchData() {
+    //   const res = await fetch('http://geek.itheima.net/v1_0/channels')
+    //   console.log(res)
+    // }
+    // fetchData()
+  }, [])
   return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)} >btn</button>
-      <button onClick={() => setName('cp')} >btn"{name}</button>
+    <div >
+
     </div>
   )
-
 }
-
-export default App
+export default App 
