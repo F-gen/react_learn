@@ -1,24 +1,19 @@
-import { createContext, useContext } from 'react'
-// 创建Context对象
-const Context = createContext()
-
-function Foo() {
-  return <div>Foo <Bar /></div>
-}
-
-function Bar() {
-  // 底层组件通过useContext函数获取数据  
-  const name = useContext(Context)
-  return <div>Bar {name}</div>
-}
-
+import { useStore } from './store/index'
+import { observer } from 'mobx-react-lite'
 function App() {
+  const { counterStore } = useStore()
   return (
-    // 顶层组件通过Provider 提供数据    
-    <Context.Provider value={'this is name'}>
-      <div><Foo /></div>
-    </Context.Provider>
+    <>
+      <div>
+        {/* store 中count 渲染，修改数据 */}
+        Count:  {counterStore.count}
+        <button onClick={counterStore.addCount}>Add</button>
+
+        {/* 使用计算属性 */}
+        compute:  {counterStore.filterList.map(item => <div key={item}>{item}</div>)}
+        <button onClick={counterStore.addList}>edit_list</button>
+      </div>
+    </>
   )
 }
-
-export default App
+export default observer(App)
